@@ -1,0 +1,27 @@
+model = "gpt-4-1106-preview"
+max_tokens = 1000
+
+[[messages]]
+role = "user"
+content = "What is Bitcoin?"
+
+[[messages]]
+role = "assistant"
+content = "It's a blockchain based cryptocurrency."
+
+[[messages]]
+role = "user"
+content = "Who invented it?"
+
+[[messages]]
+role = "assistant"
+content = "Bitcoin was invented by an unknown person or group of people using the name Satoshi Nakamoto. The identity of Satoshi Nakamoto is still a mystery; some speculate that it could be a pseudonym for a single individual, while others believe it could represent a group of people. Nakamoto introduced Bitcoin to the public in 2008 with a white paper called \"Bitcoin: A Peer-to-Peer Electronic Cash System,\" and the first Bitcoin software was released in 2009, allowing the network to come into existence with the issuance of the first bitcoins. The true identity of Satoshi Nakamoto has remained one of the biggest enigmas in the world of cryptocurrency."
+
+[[messages]]
+role = "assistant"
+content = """
+Bitcoin is a decentralized digital currency, without a central bank or single administrator, that can be sent from user to user on the peer-to-peer bitcoin network without the need for intermediaries. Transactions are verified by network nodes through cryptography and recorded in a public distributed ledger called a blockchain. 
+
+Bitcoin was invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto. The currency began use in 2009 when its implementation was released as open-source software. It is notable for being the first cryptocurrency and has sparked the launch of many other virtual currencies, collectively referred to as altcoins.
+
+Bitcoin is created as a reward for a process known as mining. They can be exchanged for other currencies, products, and services. Despite its not being legal tender in most parts of the world, Bitcoin has seen widespread use and acceptance as a form of payment and investment vehicle. It has also been criticized for its use in illegal transactions, high electricity consumption for mining activities, price volatility, and thefts from exchanges."""
