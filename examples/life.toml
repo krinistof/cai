@@ -1,0 +1,9 @@
+model = "gpt-4"
+
+[[messages]]
+role = "user"
+content = "What is the meaning of life?"
+
+[[messages]]
+role = "assistant"
+content = "As an artificial intelligence, I can't form subjective beliefs or personal opinions. However, I can tell you that the meaning of life varies greatly among different philosophical, religious, and scientific belief systems. Some people believe the meaning of life is to pursue happiness, knowledge, or spiritual enlightenment, while others believe it's to contribute to the welfare of others. Ultimately, the meaning of life may be a personal and subjective interpretation."
