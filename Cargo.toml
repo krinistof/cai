@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 dotenv = "0.15.0"
-openai-api-rs = {git = "https://github.com/krinistof/openai-api-rs.git"}
-toml = "0.8.8"
+#openai-api-rs = {git = "https://github.com/krinistof/openai-api-rs.git"}
+openai-api-rs = {path = "../openai-api-rs"}
+serde_json = "1.0.108"

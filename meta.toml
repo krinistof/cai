@@ -1,0 +1,49 @@
+model = "gpt-4"
+temperature = 0.2
+
+[[messages]]
+role = "user"
+content = """
+Convert this json to toml please. you can use inline tables.
+```json
+\"tools\": [{
+  \"type\": \"function\",
+    \"function\": {
+      \"name\": \"get_current_weather\",
+      \"description\": \"Get the current weather in a given location\",
+      \"parameters\": {
+        \"type\": \"object\",
+        \"properties\": {
+          \"location\": {
+            \"type\": \"string\",
+            \"description\": \"The city and state, e.g. San Francisco, CA\",
+          },
+          \"unit\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]},
+        },
+        \"required\": [\"location\"],
+      },
+    },
+}]
+```
+CODE ONLY!!
+"""
+
+[[messages]]
+role = "assistant"
+content = """
+```toml
+[[tools]]
+type = \"function\"
+[tools.function]
+name = \"get_current_weather\"
+description = \"Get the current weather in a given location\"
+[tools.function.parameters]
+type = \"object\"
+required = [\"location\"]
+[tools.function.parameters.properties.location]
+type = \"string\"
+description = \"The city and state, e.g. San Francisco, CA\"
+[tools.function.parameters.properties.unit]
+type = \"string\"
+enum = [\"celsius\", \"fahrenheit\"]
+```"""

@@ -1,0 +1,25 @@
+model = "gpt-4"
+
+[[tools]]
+type = "function"
+[tools.function]
+name = "get_current_weather"
+description = "Get the current weather in a given location"
+[tools.function.parameters]
+type = "object"
+required = ["location"]
+[tools.function.parameters.properties.location]
+type = "string"
+description = "The city and state, e.g. San Francisco, CA"
+[tools.function.parameters.properties.unit]
+type = "string"
+enum = ["celsius", "fahrenheit"]
+
+[[messages]]
+role = "system"
+content = "You are a Python software engineer."
+
+[[messages]]
+role = "user"
+content = "What is the sum of the integers from 0 to 100?"
+

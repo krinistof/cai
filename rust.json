@@ -1,0 +1,27 @@
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Calculate the sum of all numbers from 0 to 100 with Rust."
+    }
+  ],
+  "functions": [
+    {
+      "name": "execute_rust",
+      "description": "Execute given Rust code",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "source_code": {
+            "type": "string",
+            "description": "The Rust source code to compile and execute."
+          }
+        },
+        "required": [
+          "source_code"
+        ]
+      }
+    }
+  ]
+}

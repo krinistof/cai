@@ -18,7 +18,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
 
-    let mut req = toml::from_str(&contents)?;
+    let mut req = serde_json::from_str(&contents)?;
 
     client.continue_chat(&mut req)?;
 
@@ -27,7 +27,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .truncate(true)
         .open(path)?;
 
-    file.write_all(toml::to_string(&req)?.as_bytes())?;
+    file.write_all(serde_json::to_string_pretty(&req)?.as_bytes())?;
 
     Ok(())
 }
