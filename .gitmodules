@@ -1,0 +1,4 @@
+[submodule "openai-api-rs"]
+	path = openai-api-rs
+	url = https://github.com/krinistof/openai-api-rs.git
+	branch = main
