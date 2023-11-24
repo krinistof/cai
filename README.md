@@ -41,6 +41,7 @@ content = "As an artificial intelligence, I can't form subjective beliefs or per
 See [rustup](https://rustup.rs) for installing Rust for your system.
 After getting this project's source code, execute:
 ```sh
+git submodule update --init
 cargo install --path .
 ```
 This should build `cai`, and place it into `~/.cargo/bin`. Make sure to add this to your `PATH`.
