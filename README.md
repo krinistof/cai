@@ -45,3 +45,9 @@ git submodule update --init
 cargo install --path .
 ```
 This should build `cai`, and place it into `~/.cargo/bin`. Make sure to add this to your `PATH`.
+
+## Useful Links
+
+[OpenAI's Api Reference](https://platform.openai.com/docs/api-reference/chat)
+
+
