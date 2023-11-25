@@ -1,5 +1,7 @@
 # cai - Context AI
 
+![example workflow](https://github.com/krinistof/cai/actions/workflows/rust.yml/badge.svg)
+
 Would you like to level up your gaslighting game? Fake chat history to the OpenAI API today!
 
 ## Usage
