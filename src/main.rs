@@ -1,33 +1,40 @@
-use std::{env, fs::File, io::{Read, Write}};
-use openai_api_rs::v1::api::Client;
+use crate::common::{process_request, read_file, write_to_file};
+use anyhow::{Context, Result};
+use clap::Parser;
 use dotenv::dotenv;
+use openai_api_rs::v1::api::Client;
+use std::{env, path::PathBuf};
 
+mod common;
+mod execute;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    dotenv().ok();
+#[derive(Parser)]
+#[command(about)]
+struct Args {
+    #[arg(short = 'x', long)]
+    execute: bool,
+    #[arg(require_equals = true)]
+    input_path: PathBuf,
+}
 
-    let client = Client::new(env::var("OPENAI_API_KEY").unwrap().into());
+fn main() -> Result<()> {
+    dotenv()?;
 
-    let args: Vec<_> = env::args().collect();
-    let Some(path) = args.get(1) else {
-        return Err("Not path given!".into());
-    };
+    let client = Client::new(
+        env::var("OPENAI_API_KEY").with_context(|| "No OPENAI_API_KEY env var given!")?,
+    );
 
-    let mut file = File::open(path)?;
+    let Args {
+        input_path,
+        execute,
+    } = Args::parse();
 
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
-
+    let contents = read_file(&input_path)?;
     let mut req = toml::from_str(&contents)?;
 
-    client.continue_chat(&mut req)?;
+    process_request(&client, &mut req, execute)?;
 
-    let mut file = File::options()
-        .write(true)
-        .truncate(true)
-        .open(path)?;
-
-    file.write_all(toml::to_string(&req)?.as_bytes())?;
+    write_to_file(&input_path, &toml::to_string(&req)?)?;
 
     Ok(())
 }
