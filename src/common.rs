@@ -12,15 +12,15 @@ use std::{
     path::PathBuf,
 };
 
-#[derive(Parser)]
-#[command(about)]
+#[derive(Parser, Debug)]
+#[command(about, arg_required_else_help(true))]
 #[group(id = "command", args(vec![ "input_path", "example" ]))]
 pub struct Args {
     #[arg(short = 'x', long)]
     pub execute: bool,
     #[arg(short = 'e', long, group = "input")]
     pub example: bool,
-    #[arg(require_equals = true, group = "input")]
+    #[arg(group = "input")]
     pub input_path: Option<PathBuf>,
 }
 
@@ -49,27 +49,26 @@ impl ClientExt for Client {
                 ..
             } => {
                 let contents = read_file(input_path)?;
-                let mut req = toml::from_str(contents.as_str())?;
+                let mut chat = toml::from_str(contents.as_str())?;
 
                 if execute {
-                    if let Some(command) = get_command(&req)? {
+                    if let Some(command) = get_command(&chat)? {
                         let output = run(&command)?;
-                        req.messages.push(ChatCompletionMessage {
+                        chat.messages.push(ChatCompletionMessage {
                             role: MessageRole::user,
                             content: format!("output of command:\n```\n{output}\n```\n"),
                             name: None,
                             function_call: None,
                         });
                     }
-                    Ok(())
                 } else {
                     // TODO move continue_chat to ClientExt trait from dependency
-                    self.continue_chat(&mut req)?;
-
-                    write_to_file(input_path, &toml::to_string(&req)?)
+                    self.continue_chat(&mut chat)?;
                 }
+
+                write_to_file(input_path, &toml::to_string(&chat)?)
             }
-            _ => Ok(()),
+            _ => Ok(println!("`{args:?}` didn't match!")),
         }
     }
 }

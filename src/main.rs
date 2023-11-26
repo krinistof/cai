@@ -6,7 +6,7 @@ use openai_api_rs::v1::api::Client;
 use std::env;
 
 fn main() -> Result<()> {
-    dotenv()?;
+    dotenv().ok();
 
     let client = Client::new(
         env::var("OPENAI_API_KEY").with_context(|| "No OPENAI_API_KEY env var given!")?,
