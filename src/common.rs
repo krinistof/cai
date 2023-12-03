@@ -16,11 +16,15 @@ use std::{
 #[command(about, arg_required_else_help(true))]
 #[group(id = "command", args(vec![ "input_path", "example" ]))]
 pub struct Args {
+    /// Find the last message, and if it contains a shell command wrapped in ```sh, execute it and
+    /// append the output to the conversation.
     #[arg(short = 'x', long)]
     pub execute: bool,
-    #[arg(short = 'e', long, group = "input")]
+    /// Drop an example `new.toml` into the current directory and exit.
+    #[arg(short = 'e', long, group = "command")]
     pub example: bool,
-    #[arg(group = "input")]
+    /// Path to the conversation TOML file.
+    #[arg(group = "command")]
     pub input_path: Option<PathBuf>,
 }
 
